@@ -3,7 +3,7 @@ from matplotlib import gridspec
 import numpy as np
 
 
-def plot_alignment(x0, x1, path, cost, figsize=(10,10)):
+def plot_alignment(x0, x1, path, cost, figsize=(10,10), show_xaxes=False):
     """Plots the alignment of two (one-d) time series given a DTW cost and path
 
     Note that plot alignment creates its own figure!
@@ -19,16 +19,18 @@ def plot_alignment(x0, x1, path, cost, figsize=(10,10)):
     fig = plt.figure(figsize=figsize)
     gs = gridspec.GridSpec(2, 2, width_ratios=[1, 5], height_ratios=[5, 1])
 
-    # plot the second time series vertically
+    # plot the second time series vertically 
     ax0 = plt.subplot(gs[0,0])
     ax0.plot(x1, np.arange(len(x1)))
     ax0.set_xlim(ax0.get_xlim()[::-1]) # reverse the x axis for this horizontal one
-    ax0.get_yaxis().set_visible(False)
+    ax0.set_ylim((0, len(x1)))
+    ax0.get_yaxis().set_visible(show_xaxes)
 
-    # plot the first time series horizontally 
+    # plot the second time series horizontally 
     ax1 = plt.subplot(gs[1, 1])
     ax1.plot(np.arange(len(x0)), x0)
-    ax1.get_xaxis().set_visible(False)
+    ax1.get_xaxis().set_visible(show_xaxes)
+    ax1.set_xlim((0, len(x0)))
 
     # plot the paths overlaid on the cost
     ax2 = plt.subplot(gs[0, 1])

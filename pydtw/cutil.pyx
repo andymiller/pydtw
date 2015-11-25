@@ -3,7 +3,6 @@
 # distutils: extra_link_args = -fopenmp
 
 ###############################################################################
-## Cythonized functions for celeste graphical model
 ## Author: Andrew Miller <acm@seas.harvard.edu>
 ###############################################################################
 from __future__ import division

@@ -6,10 +6,10 @@ import cutil
 # (vectorized) distance functions for point-point distances #
 #############################################################
 def abs_dist(x, y):
-    return np.sum(np.abs(x-y), axis=2)
+    return np.sum(np.abs(x[:, None, :] - y[None, :, :]), axis=2)
 
 def sq_dist(x, y):
-    return np.sum((x-y)**2, axis=2)
+    return np.sum((x[:, None, :] - y[None, :, :])**2, axis=2)
 
 
 #####################
@@ -42,7 +42,7 @@ def dtw(x, y, dist=abs_dist):
     D[1:, 0] = np.inf
 
     # handle pairwise dist calculation w/ broadcasting
-    D[1:, 1:] = dist(x[:, None, :], y[None, :, :])
+    D[1:, 1:] = dist(x, y)
 
     # sum up distance from neighboring cells
     #for i in range(r):

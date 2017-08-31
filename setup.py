@@ -5,7 +5,8 @@ from Cython.Build import cythonize
 import numpy
 
 setup(
-   name = "Andrew Miller",
+   author = "Andrew Miller",
+   name = 'pydtw',
    license = "MIT",
    packages = ['pydtw'],
    ext_modules  = cythonize(['pydtw/*.pyx']),
